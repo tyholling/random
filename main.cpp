@@ -1,16 +1,14 @@
 #include <cstdint>
 #include <cstdio>
 
-uint32_t xors(uint32_t x)
-{
+uint32_t xors(uint32_t x) {
   x ^= x << 13;
   x ^= x >> 17;
   x ^= x << 5;
   return x;
 }
 
-int main()
-{
+int main() {
   uint32_t i = 0;
   uint32_t x = 1;
   printf("i: %08x x: %08x\n", i, x);
