@@ -1,6 +1,26 @@
+#include <cstdint>
 #include <cstdio>
+
+uint32_t xors(uint32_t x)
+{
+  x ^= x << 13;
+  x ^= x >> 17;
+  x ^= x << 5;
+  return x;
+}
 
 int main()
 {
-  std::puts("hello world");
+  uint32_t i = 0;
+  uint32_t x = 1;
+  printf("i: %08x x: %08x\n", i, x);
+
+  uint32_t next = 0x0fff'ffff;
+  for (i = 1; i; ++i) {
+    x = xors(x);
+    if (i == next) {
+      printf("i: %08x x: %08x\n", i, x);
+      next += 0x1000'0000;
+    }
+  }
 }
