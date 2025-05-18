@@ -13,6 +13,7 @@ uint32_t xors(uint32_t x) {
   return x;
 }
 
+// check: xors has 2^32 - 1 nonzero values
 void test() {
   auto bits = make_unique<bitset<0x1'0000'0000>>();
   bits->set(0);
