@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cstdint>
 #include <cstdio>
 
@@ -8,17 +9,19 @@ uint32_t xors(uint32_t x) {
   return x;
 }
 
-int main() {
+void test(uint32_t k) {
   uint32_t i = 0;
-  uint32_t x = 1;
-  printf("i: %08x x: %08x\n", i, x);
+  uint32_t x = k;
 
-  uint32_t next = 0x0fff'ffff;
   for (i = 1; i; ++i) {
     x = xors(x);
-    if (i == next) {
-      printf("i: %08x x: %08x\n", i, x);
-      next += 0x1000'0000;
-    }
+  }
+  assert(x == k);
+  printf("i: %08x x: %08x\n", i, x);
+}
+
+int main() {
+  for (uint32_t i = 1; i < 9; ++i) {
+    test(i);
   }
 }
