@@ -1,10 +1,10 @@
-#include "math.h"
-
 #include <bitset>
 #include <cassert>
 #include <cstdint>
 #include <cstdio>
 #include <memory>
+
+#include "math.h"
 
 using namespace std;
 
@@ -30,7 +30,7 @@ void test() {
   assert(x == 1);
 
   printf("bits count: %11lx\n", bits->count());
-  assert(bits->count() == bits->size());
+  assert(bits->all());
 }
 
 int main() { test(); }
