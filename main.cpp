@@ -1,6 +1,10 @@
+#include <bitset>
 #include <cassert>
 #include <cstdint>
 #include <cstdio>
+#include <memory>
+
+using namespace std;
 
 uint32_t xors(uint32_t x) {
   x ^= x << 13;
@@ -9,19 +13,28 @@ uint32_t xors(uint32_t x) {
   return x;
 }
 
-void test(uint32_t k) {
-  uint32_t i = 0;
-  uint32_t x = k;
+void test() {
+  auto bits = make_unique<bitset<0x1'0000'0000>>();
+  bits->set(0);
 
+  uint32_t i = 0;
+  uint32_t x = 1;
+  printf("i: %08x x: %08x\n", i, x);
+
+  uint32_t step = 0x1000'0000;
+  uint32_t next = 0x0fff'ffff;
   for (i = 1; i; ++i) {
     x = xors(x);
+    if (i == next) {
+      printf("i: %08x x: %08x\n", i, x);
+      next += step;
+    }
+    bits->set(x);
   }
-  assert(x == k);
-  printf("i: %08x x: %08x\n", i, x);
+  assert(x == 1);
+
+  printf("bits count: %11lx\n", bits->count());
+  assert(bits->count() == bits->size());
 }
 
-int main() {
-  for (uint32_t i = 1; i < 9; ++i) {
-    test(i);
-  }
-}
+int main() { test(); }
