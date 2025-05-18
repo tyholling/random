@@ -8,5 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS Off)
 
 add_executable(random main.cpp)
+add_executable(test test.cpp)
 
 target_link_libraries(random)
+target_link_libraries(test)
