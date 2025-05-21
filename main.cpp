@@ -19,8 +19,7 @@ public:
   bool enqueue(uint32_t num, milliseconds duration) {
     {
       unique_lock<mutex> lock(mtx);
-      if (!cv_producer.wait_for(lock, duration,
-                                [&] { return q->size() < capacity; })) {
+      if (!cv_producer.wait_for(lock, duration, [&] { return q->size() < capacity; })) {
         return false;
       }
       q->push(num);
