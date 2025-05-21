@@ -27,9 +27,8 @@ void test() {
     }
     bits->set(x);
   }
-  assert(x == 1);
 
-  printf("bits count: %11lx\n", bits->count());
+  assert(x == 1);
   assert(bits->all());
 }
 
